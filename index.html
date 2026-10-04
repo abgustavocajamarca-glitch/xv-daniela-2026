@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mis XV Años · Daniela</title>
-<meta name="description" content="Daniela cumple 15 años. Te invitamos a celebrar el viernes 6 de noviembre de 2026 en Daule.">
+<meta name="description" content="Daniela cumple 15 años. Te invitamos a celebrar el sábado 7 de noviembre de 2026 en Daule.">
 <meta property="og:title" content="Mis XV Años · Daniela">
-<meta property="og:description" content="Te invitamos a celebrar los quince años de Daniela · Viernes 6 de noviembre de 2026 · Daule">
+<meta property="og:description" content="Te invitamos a celebrar los quince años de Daniela · Sábado 7 de noviembre de 2026 · Daule">
 <meta property="og:type" content="website">
 <meta property="og:image" content="media/poster.jpg">
 <meta name="theme-color" content="#04261d">
@@ -210,7 +210,7 @@ footer .script{font-size:54px;color:var(--gold-l);line-height:1.1}
     <div class="eyebrow reveal" style="margin-top:-2px">Años</div>
     <div class="arch reveal"><div class="ph" id="heroPh"><span class="mono gold">D</span></div></div>
     <div class="name gold reveal">Daniela</div>
-    <div class="date-big reveal">6 · NOVIEMBRE · 2026</div>
+    <div class="date-big reveal">7 · NOVIEMBRE · 2026</div>
     <div class="scroll reveal"><span>Desliza</span><i></i></div>
   </section>
 
@@ -328,7 +328,7 @@ footer .script{font-size:54px;color:var(--gold-l);line-height:1.1}
     <div class="card reveal">
       <svg class="ico" viewBox="0 0 48 48"><path d="M14 6h20l-2 14a8 8 0 0 1-16 0zM24 28v14M16 42h16M16 13h16"/></svg>
       <h3>Recepción</h3>
-      <div class="when" id="recHora">Viernes 6 de noviembre · 16:00</div>
+      <div class="when" id="recHora">Sábado 7 de noviembre · 16:00</div>
       <p>En mi casa<br>Daule · Cdla. Marianita No. 2<br>Calles Camilo Ponce Enríquez y Los Ríos</p>
       <a class="btn" id="mapRec" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>Cómo llegar</a>
     </div>
@@ -399,7 +399,7 @@ footer .script{font-size:54px;color:var(--gold-l);line-height:1.1}
    ============================================================ */
 const CONFIG = {
   nombre: "Daniela",
-  fechaEvento: "2026-11-06T16:00:00-05:00",   // viernes 6 de noviembre de 2026, 16:00 (hora de Ecuador)
+  fechaEvento: "2026-11-07T16:00:00-05:00",   // sábado 7 de noviembre de 2026, 16:00 (hora de Ecuador)
   duracionHoras: 5,
   lugar: "En mi casa · Daule, Cdla. Marianita No. 2, calles Camilo Ponce Enríquez y Los Ríos",
   mapa: "https://maps.app.goo.gl/41XLeh2YEY4gNL1u8",
@@ -486,7 +486,7 @@ $('#rsvp').addEventListener('submit', e => {
 
 /* --- Compartir --- */
 $('#share').addEventListener('click', async () => {
-  const data = { title: 'Mis XV Años · ' + CONFIG.nombre, text: 'Te invito a mis XV años · viernes 6 de noviembre de 2026 · Daule 💚', url: location.href };
+  const data = { title: 'Mis XV Años · ' + CONFIG.nombre, text: 'Te invito a mis XV años · sábado 7 de noviembre de 2026 · Daule 💚', url: location.href };
   try { if (navigator.share) await navigator.share(data); else { await navigator.clipboard.writeText(location.href); $('#share').textContent = '¡Enlace copiado!'; } } catch {}
 });
 
@@ -614,7 +614,7 @@ function chime(notes = [880, 1318.5]){
 const buzz = ms => { try { navigator.vibrate && navigator.vibrate(ms); } catch {} };
 
 /* globo de diálogo */
-const FRASES = ['¡Gracias por venir a mi fiesta! 💚', '¡Te espero el 6 de noviembre!', '¡Prepárate para bailar conmigo!', 'Cumplo quince… ¡y estoy feliz!', '¡Qué linda reverencia! ✨', '¡Me encanta que vengas!', '¡Esta noche es de ensueño!'];
+const FRASES = ['¡Gracias por venir a mi fiesta! 💚', '¡Te espero el 7 de noviembre!', '¡Prepárate para bailar conmigo!', 'Cumplo quince… ¡y estoy feliz!', '¡Qué linda reverencia! ✨', '¡Me encanta que vengas!', '¡Esta noche es de ensueño!'];
 let bt = null, fi = 0;
 function say(txt, ms = 2200){ el.bubble.textContent = txt; el.bubble.classList.add('show'); clearTimeout(bt); bt = setTimeout(() => el.bubble.classList.remove('show'), ms); }
 
