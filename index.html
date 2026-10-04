@@ -120,6 +120,9 @@ h2{font-family:var(--title);font-weight:400;letter-spacing:.28em;text-transform:
 .tl time{font-family:var(--title);color:var(--gold);letter-spacing:.14em;font-size:14px}
 .tl strong{display:block;font-family:var(--title);font-weight:400;font-size:18px;letter-spacing:.06em}
 .tl span{color:var(--muted);font-size:18px}
+.tl.surprise{padding:14px 16px;margin-left:-6px;border:1px solid rgba(217,184,108,.55);border-radius:14px;background:linear-gradient(160deg,rgba(217,184,108,.16),rgba(15,107,79,.25));box-shadow:0 0 28px rgba(217,184,108,.18)}
+.tl.surprise::before{left:-24px;top:20px;background:#fff1c2;box-shadow:0 0 0 5px rgba(217,184,108,.35),0 0 18px rgba(246,227,168,.8)}
+.tl.surprise strong{font-family:var(--script);font-size:34px;letter-spacing:0;background:var(--goldgrad);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
 .tentative{font-size:16px;color:var(--muted);font-style:italic;margin-top:-8px}
 
 /* ===== VESTIMENTA ===== */
@@ -151,6 +154,20 @@ form .btn{justify-content:center;width:100%;margin-top:6px}
 
 footer{text-align:center;padding:40px 24px 90px;color:var(--muted)}
 footer .script{font-size:54px;color:var(--gold-l);line-height:1.1}
+
+/* ===== LUCES ===== */
+.garland{position:absolute;left:0;right:0;top:0;height:90px;pointer-events:none;z-index:3}
+.garland svg{width:100%;height:100%;display:block;overflow:visible}
+.bulb{animation:twinkle 1.6s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
+.garland.foot{top:auto;bottom:0;transform:scaleY(-1)}
+
+/* ===== MENSAJES ===== */
+.msg{margin:22px 0;padding:26px 22px;border-radius:20px;border:1px solid rgba(217,184,108,.45);background:linear-gradient(160deg,rgba(15,107,79,.5),rgba(4,38,29,.7));box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.msg h3{font-family:var(--script);font-weight:400;font-size:38px;color:var(--gold-l);line-height:1.1}
+.msg p{font-style:italic;font-size:21px;margin:10px 0}
+.msg audio,.msg video{width:100%;margin-top:10px;border-radius:12px}
+.msg video{aspect-ratio:9/16;max-width:300px;object-fit:cover;background:#031a14}
 
 /* ===== MUSICA ===== */
 #music{position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:rgba(4,38,29,.8);backdrop-filter:blur(6px);color:var(--gold-l);display:none;align-items:center;justify-content:center;cursor:pointer}
@@ -187,6 +204,7 @@ footer .script{font-size:54px;color:var(--gold-l);line-height:1.1}
 <main>
   <!-- HERO -->
   <section id="hero">
+    <div class="garland" id="garlandTop"></div>
     <div class="eyebrow reveal">Mis</div>
     <div class="xv gold reveal">XV</div>
     <div class="eyebrow reveal" style="margin-top:-2px">Años</div>
@@ -199,7 +217,7 @@ footer .script{font-size:54px;color:var(--gold-l);line-height:1.1}
   <!-- FRASE -->
   <section>
     <div class="divider reveal"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg></div>
-    <p class="quote reveal">“Hay noches que un padre sueña desde el día en que su hija nace. Quiero que vivas esta con nosotros, porque eres parte de mi historia.”</p>
+    <p class="quote reveal">“Hay noches que unos padres sueñan desde el día en que su hija nace. Queremos que vivas esta con nosotros, porque eres parte de su historia.”</p>
     <div class="parents reveal">
       Con el amor de sus padres
       <b>Abg. Gustavo Cajamarca Huayamave<br>&amp; Lisbeth González Barzola</b>
@@ -284,6 +302,13 @@ footer .script{font-size:54px;color:var(--gold-l);line-height:1.1}
     <button class="btn" id="tiltBtn" type="button">Activar movimiento 📱</button>
   </section>
 
+  <!-- MENSAJES DE LA FAMILIA (aparece solo si hay contenido en CONFIG.mensajes) -->
+  <section id="msgSec" style="display:none">
+    <h2 class="reveal">Mensajes para ti</h2>
+    <div class="script gold reveal" style="font-size:50px;line-height:1.1">De mi familia</div>
+    <div id="msgList"></div>
+  </section>
+
   <!-- CUENTA REGRESIVA -->
   <section>
     <h2 class="reveal">Falta muy poco</h2>
@@ -303,8 +328,8 @@ footer .script{font-size:54px;color:var(--gold-l);line-height:1.1}
     <div class="card reveal">
       <svg class="ico" viewBox="0 0 48 48"><path d="M14 6h20l-2 14a8 8 0 0 1-16 0zM24 28v14M16 42h16M16 13h16"/></svg>
       <h3>Recepción</h3>
-      <div class="when" id="recHora">Viernes 6 de noviembre · 20:00</div>
-      <p>Casa de los abuelos<br>Daule · Cdla. Marianita No. 2<br>Calles Camilo Ponce Enríquez y Los Ríos</p>
+      <div class="when" id="recHora">Viernes 6 de noviembre · 16:00</div>
+      <p>En mi casa<br>Daule · Cdla. Marianita No. 2<br>Calles Camilo Ponce Enríquez y Los Ríos</p>
       <a class="btn" id="mapRec" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>Cómo llegar</a>
     </div>
 
@@ -359,9 +384,10 @@ footer .script{font-size:54px;color:var(--gold-l);line-height:1.1}
   </section>
 </main>
 
-<footer>
+<footer style="position:relative">
+  <div class="garland foot" id="garlandFoot" style="height:70px"></div>
   <div class="script reveal">Gracias por ser parte de mi historia</div>
-  <p class="reveal" style="margin-top:6px">Con cariño, Daniela 💚</p>
+  <p class="reveal" style="margin-top:6px">Con cariño,<br>Daniela y sus padres, Gustavo y Lisbeth 💚</p>
   <button class="btn reveal" id="share" type="button" style="margin-top:22px">Compartir invitación</button>
 </footer>
 
@@ -373,21 +399,24 @@ footer .script{font-size:54px;color:var(--gold-l);line-height:1.1}
    ============================================================ */
 const CONFIG = {
   nombre: "Daniela",
-  fechaEvento: "2026-11-06T20:00:00-05:00",   // viernes 6 de noviembre de 2026, 20:00 (hora de Ecuador)
-  duracionHoras: 6,
-  lugar: "Casa de los abuelos · Daule, Cdla. Marianita No. 2, calles Camilo Ponce Enríquez y Los Ríos",
+  fechaEvento: "2026-11-06T16:00:00-05:00",   // viernes 6 de noviembre de 2026, 16:00 (hora de Ecuador)
+  duracionHoras: 5,
+  lugar: "En mi casa · Daule, Cdla. Marianita No. 2, calles Camilo Ponce Enríquez y Los Ríos",
   mapa: "https://maps.app.goo.gl/41XLeh2YEY4gNL1u8",
   whatsapp: "",                 // número con código de país, sin + ni espacios. Ej: 593999999999 (vacío = el invitado elige el contacto)
   programa: [
-    ["20:00", "Recepción", "Bienvenida a nuestros invitados"],
-    ["20:45", "Entrada de la quinceañera", "El momento más esperado"],
-    ["21:00", "Vals de honor", "Daniela baila con su papá"],
-    ["21:30", "Brindis y cena", "Una noche para compartir"],
-    ["22:30", "Baile sorpresa", "Daniela y sus amigos"],
-    ["23:00", "Pastel", "Un deseo para los quince"],
-    ["23:30", "¡Hora loca!", "Máscaras, luces y mucha diversión"],
-    ["01:00", "Cierre", "Gracias por acompañarme"]
+    ["16:00", "Recepción", "Bienvenida a nuestros invitados"],
+    ["16:45", "Entrada de la quinceañera", "El momento más esperado"],
+    ["17:00", "Vals de honor", "Daniela baila con sus padres"],
+    ["17:30", "Brindis y bocaditos", "Una tarde para compartir"],
+    ["SORPRESA", "Artistas invitados", "Habrá artistas invitados: una sorpresa especial para esta fiesta"],
+    ["18:30", "Baile sorpresa", "Daniela y sus amigos"],
+    ["19:00", "Pastel", "Un deseo para los quince"],
+    ["19:30", "¡Hora loca!", "Máscaras, luces y mucha diversión"],
+    ["21:00", "Cierre", "Gracias por acompañarme"]
   ],
+  // Mensajes de la familia: { quien: "Daniel", texto: "...", audio: "media/daniel.mp3", video: "media/daniel.mp4" }  (todo opcional)
+  mensajes: [],
   foto: "",                     // ej: "media/daniela.jpg" (vacío = monograma)
   galeria: [],                  // ej: ["media/1.jpg","media/2.jpg","media/3.jpg"]
   musica: "media/vals.mp3"
@@ -398,7 +427,28 @@ const $ = s => document.querySelector(s);
 $('#mapRec').href = CONFIG.mapa;
 if (CONFIG.foto) $('#heroPh').innerHTML = `<img src="${CONFIG.foto}" alt="${CONFIG.nombre}">`;
 $('#gallery').innerHTML = [0,1,2].map(i => `<div class="g">${CONFIG.galeria[i] ? `<img src="${CONFIG.galeria[i]}" alt="">` : '♡'}</div>`).join('') + `<div class="g"><span class="gold" style="font-size:44px">XV</span></div>`;
-$('#timeline').innerHTML = CONFIG.programa.map(([t,a,b]) => `<div class="tl reveal"><time>${t}</time><strong>${a}</strong><span>${b}</span></div>`).join('');
+$('#timeline').innerHTML = CONFIG.programa.map(([t,a,b]) => `<div class="tl reveal${t === 'SORPRESA' ? ' surprise' : ''}"><time>${t === 'SORPRESA' ? '✦ Sorpresa especial ✦' : t}</time><strong>${a}</strong><span>${b}</span></div>`).join('');
+
+/* --- Mensajes de la familia --- */
+if (CONFIG.mensajes.length){
+  $('#msgSec').style.display = '';
+  $('#msgList').innerHTML = CONFIG.mensajes.map(m => `<div class="msg reveal"><h3>${m.quien}</h3>${m.texto ? `<p>“${m.texto}”</p>` : ''}${m.video ? `<video controls playsinline preload="metadata" src="${m.video}"></video>` : (m.audio ? `<audio controls preload="none" src="${m.audio}"></audio>` : '')}</div>`).join('');
+}
+/* --- Guirnaldas de luces --- */
+function garland(host){
+  const W = 360, H = 90, segs = 3, per = 9; let svg = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><radialGradient id="hg"><stop offset="0" stop-color="#fff1c2"/><stop offset=".4" stop-color="#f6e3a8" stop-opacity=".5"/><stop offset="1" stop-color="#f6e3a8" stop-opacity="0"/></radialGradient><radialGradient id="he"><stop offset="0" stop-color="#d9fff0"/><stop offset=".4" stop-color="#5be3b0" stop-opacity=".5"/><stop offset="1" stop-color="#5be3b0" stop-opacity="0"/></radialGradient></defs>`;
+  let k = 0;
+  for (let i = 0; i < segs; i++){
+    const x0 = i*W/segs, x1 = (i+1)*W/segs, cx = (x0+x1)/2, y0 = 6, cy = 62;
+    svg += `<path d="M${x0},${y0} Q${cx},${cy} ${x1},${y0}" fill="none" stroke="rgba(217,184,108,.6)" stroke-width="1.2" vector-effect="non-scaling-stroke"/>`;
+    for (let j = 1; j <= per; j++){
+      const u = j/(per+1), x = (1-u)*(1-u)*x0 + 2*(1-u)*u*cx + u*u*x1, y = (1-u)*(1-u)*y0 + 2*(1-u)*u*cy + u*u*y0, em = k % 3 === 1;
+      svg += `<g class="bulb" style="animation-delay:${((k*.37)%1.6).toFixed(2)}s;animation-duration:${(1.2 + (k%4)*.25).toFixed(2)}s"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="url(#${em?'he':'hg'})"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.2" fill="${em?'#d9fff0':'#fff6d6'}"/></g>`; k++;
+    }
+  }
+  host.innerHTML = svg + '</svg>';
+}
+garland($('#garlandTop')); garland($('#garlandFoot'));
 
 /* --- Revelado al hacer scroll --- */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });
@@ -447,9 +497,8 @@ if (CONFIG.musica){ audio.src = CONFIG.musica; audio.volume = .6; mbtn.classList
 mbtn.addEventListener('click', () => {
   if (audio.paused){ audio.play().catch(()=>{}); mbtn.classList.remove('muted'); musicWanted = true; } else { audio.pause(); mbtn.classList.add('muted'); musicWanted = false; }
 });
-vid.addEventListener('play', () => { if (!audio.paused) audio.pause(); });
-vid.addEventListener('pause', () => { if (musicWanted && !vid.ended) audio.play().catch(()=>{}); });
-vid.addEventListener('ended', () => { if (musicWanted) audio.play().catch(()=>{}); });
+document.addEventListener('play', e => { if (e.target !== audio && !audio.paused) audio.pause(); }, true);
+document.addEventListener('ended', e => { if (e.target !== audio && musicWanted) audio.play().catch(()=>{}); }, true);
 
 /* --- Efectos de partículas (pétalos y destellos) --- */
 const cv = $('#fx'), cx = cv.getContext('2d');
@@ -464,6 +513,14 @@ function make(y){
     rot: Math.random()*6, vr: (Math.random()-.5)*.03, petal, a: .25+Math.random()*.4, ph: Math.random()*6, col: petal ? (Math.random()<.5 ? '#2fa77c' : '#d9b86c') : '#f6e3a8' };
 }
 for (let i = 0; i < (reduce ? 0 : 46); i++) parts.push(make());
+function shell(x = W*(.2 + Math.random()*.6), y = H*(.15 + Math.random()*.3), col){
+  if (reduce) return;
+  const cols = col ? [col] : ['#f6e3a8', '#5be3b0', '#fff7dc', '#d9b86c'], c = cols[Math.floor(Math.random()*cols.length)], n = 46;
+  for (let i = 0; i < n; i++){
+    const a = i/n*6.2832 + Math.random()*.2, v = 1.6 + Math.random()*2.8;
+    parts.push({ fw: true, x, y, px: x, py: y, vx: Math.cos(a)*v, vy: Math.sin(a)*v, life: 60 + Math.random()*40, max: 100, col: i % 4 === 0 ? '#fff7dc' : c, r: 1.2 + Math.random()*1.4 });
+  }
+}
 function burst(x = W/2, y = H*.3, n = 70){
   if (reduce) return;
   for (let i = 0; i < n; i++){ const p = make(y); p.x = x; p.vy = -3+Math.random()*3.5; p.vx = -3+Math.random()*6; p.life = 90+Math.random()*70; parts.push(p); }
@@ -472,6 +529,12 @@ function burst(x = W/2, y = H*.3, n = 70){
   cx.clearRect(0, 0, W, H);
   for (let i = parts.length-1; i >= 0; i--){
     const p = parts[i];
+    if (p.fw){
+      p.px = p.x; p.py = p.y; p.x += p.vx; p.y += p.vy; p.vx *= .965; p.vy = p.vy*.965 + .045; p.life--;
+      if (p.life <= 0){ parts.splice(i,1); continue; }
+      const a = Math.min(1, p.life/40); cx.save(); cx.globalAlpha = a; cx.strokeStyle = p.col; cx.lineWidth = p.r; cx.lineCap = 'round'; cx.shadowColor = p.col; cx.shadowBlur = 8;
+      cx.beginPath(); cx.moveTo(p.px, p.py); cx.lineTo(p.x, p.y); cx.stroke(); cx.restore(); continue;
+    }
     p.ph += .03; p.x += p.vx + Math.sin(p.ph)*.4; p.y += p.vy; p.rot += p.vr;
     if (p.life != null){ p.life--; p.vy += .05; p.vx *= .985; if (p.life <= 0){ parts.splice(i,1); continue; } }
     else if (p.y > H+20){ p.y = -20; p.x = Math.random()*W; }
@@ -484,12 +547,15 @@ function burst(x = W/2, y = H*.3, n = 70){
   requestAnimationFrame(draw);
 })();
 
+/* --- Cohetes ocasionales de celebración --- */
+(function idle(){ setTimeout(() => { if (!document.hidden && !document.body.classList.contains('locked')) shell(); idle(); }, 7000 + Math.random()*6000); })();
+
 /* --- Abrir el sobre --- */
 const env = $('#env'); let opened = false;
 function openEnv(){
   if (opened) return; opened = true; env.classList.add('open');
   if (CONFIG.musica){ audio.play().then(() => { musicWanted = true; }).catch(() => mbtn.classList.add('muted')); }
-  setTimeout(() => { $('#cover').classList.add('gone'); document.body.classList.remove('locked'); burst(); }, 2300);
+  setTimeout(() => { $('#cover').classList.add('gone'); document.body.classList.remove('locked'); burst(); shell(W*.2, H*.22); setTimeout(() => shell(W*.8, H*.18), 350); setTimeout(() => shell(W*.5, H*.12, '#5be3b0'), 700); }, 2300);
 }
 env.addEventListener('click', openEnv);
 env.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openEnv(); } });
@@ -577,9 +643,10 @@ function saludo(){
   setTimeout(() => { clearInterval(w); S.aR.t = 0; S.head.t = 0; busy = false; }, 1500);
 }
 const ACCIONES = [reverencia, () => giro(1), saludo, () => giro(-1)]; let ai = 0;
-function especial(){ burst(innerWidth/2, innerHeight*.5, 120); chime([523.25, 659.25, 783.99, 1046.5, 1318.5]); say('¡Eres el invitado más bailarín! 💃🏻', 3200); giro(1); }
+function especial(){ burst(innerWidth/2, innerHeight*.5, 120); [0, 250, 500, 800].forEach(d => setTimeout(() => shell(), d)); chime([523.25, 659.25, 783.99, 1046.5, 1318.5]); say('¡Eres el invitado más bailarín! 💃🏻', 3200); giro(1); }
 function accion(){
   if (busy) return; taps++;
+  { const r = el.stage.getBoundingClientRect(); shell(r.left + r.width*(.25 + Math.random()*.5), Math.max(80, r.top + r.height*.15)); }
   if (taps % 7 === 0){ especial(); return; }
   say(FRASES[fi++ % FRASES.length]); ACCIONES[ai++ % ACCIONES.length]();
 }
