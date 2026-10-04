@@ -388,7 +388,6 @@ footer .script{font-size:54px;color:var(--gold-l);line-height:1.1}
   <div class="garland foot" id="garlandFoot" style="height:70px"></div>
   <div class="script reveal">Gracias por ser parte de mi historia</div>
   <p class="reveal" style="margin-top:6px">Con cariño,<br>Daniela y sus padres, Gustavo y Lisbeth 💚</p>
-  <button class="btn reveal" id="share" type="button" style="margin-top:22px">Compartir invitación</button>
 </footer>
 
 <audio id="audio" loop preload="none"></audio>
@@ -403,17 +402,16 @@ const CONFIG = {
   duracionHoras: 5,
   lugar: "En mi casa · Daule, Cdla. Marianita No. 2, calles Camilo Ponce Enríquez y Los Ríos",
   mapa: "https://maps.app.goo.gl/41XLeh2YEY4gNL1u8",
-  whatsapp: "",                 // número con código de país, sin + ni espacios. Ej: 593999999999 (vacío = el invitado elige el contacto)
+  whatsapp: "593994051743",     // 0994051743 con código de Ecuador (+593), sin + ni espacios
   programa: [
     ["16:00", "Recepción", "Bienvenida a nuestros invitados"],
     ["16:45", "Entrada de la quinceañera", "El momento más esperado"],
     ["17:00", "Vals de honor", "Daniela baila con sus padres"],
     ["17:30", "Brindis y bocaditos", "Una tarde para compartir"],
-    ["SORPRESA", "Artistas invitados", "Habrá artistas invitados: una sorpresa especial para esta fiesta"],
-    ["18:30", "Baile sorpresa", "Daniela y sus amigos"],
+    ["", "Baile sorpresa", "Daniela y sus amigos"],
     ["19:00", "Pastel", "Un deseo para los quince"],
-    ["19:30", "¡Hora loca!", "Máscaras, luces y mucha diversión"],
-    ["21:00", "Cierre", "Gracias por acompañarme"]
+    ["", "¡Hora loca!", "Máscaras, luces y mucha diversión"],
+    ["SORPRESA", "Artistas invitados", "Habrá artistas invitados: una sorpresa especial para esta fiesta"]
   ],
   // Mensajes de la familia: { quien: "Daniel", texto: "...", audio: "media/daniel.mp3", video: "media/daniel.mp4" }  (todo opcional)
   mensajes: [],
@@ -427,7 +425,7 @@ const $ = s => document.querySelector(s);
 $('#mapRec').href = CONFIG.mapa;
 if (CONFIG.foto) $('#heroPh').innerHTML = `<img src="${CONFIG.foto}" alt="${CONFIG.nombre}">`;
 $('#gallery').innerHTML = [0,1,2].map(i => `<div class="g">${CONFIG.galeria[i] ? `<img src="${CONFIG.galeria[i]}" alt="">` : '♡'}</div>`).join('') + `<div class="g"><span class="gold" style="font-size:44px">XV</span></div>`;
-$('#timeline').innerHTML = CONFIG.programa.map(([t,a,b]) => `<div class="tl reveal${t === 'SORPRESA' ? ' surprise' : ''}"><time>${t === 'SORPRESA' ? '✦ Sorpresa especial ✦' : t}</time><strong>${a}</strong><span>${b}</span></div>`).join('');
+$('#timeline').innerHTML = CONFIG.programa.map(([t,a,b]) => `<div class="tl reveal${t === 'SORPRESA' ? ' surprise' : ''}">${t ? `<time>${t === 'SORPRESA' ? '✦ Sorpresa especial ✦' : t}</time>` : ''}<strong>${a}</strong><span>${b}</span></div>`).join('');
 
 /* --- Mensajes de la familia --- */
 if (CONFIG.mensajes.length){
@@ -482,12 +480,6 @@ $('#rsvp').addEventListener('submit', e => {
     (si ? `*confirmo mi asistencia* a los XV años (${$('#rGuests').value} persona/s). ¡Allí estaremos!` : `lamentablemente *no podré asistir* a los XV años, pero les deseo lo mejor.`) +
     ($('#rMsg').value.trim() ? `\n\n"${$('#rMsg').value.trim()}"` : '');
   window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
-});
-
-/* --- Compartir --- */
-$('#share').addEventListener('click', async () => {
-  const data = { title: 'Mis XV Años · ' + CONFIG.nombre, text: 'Te invito a mis XV años · sábado 7 de noviembre de 2026 · Daule 💚', url: location.href };
-  try { if (navigator.share) await navigator.share(data); else { await navigator.clipboard.writeText(location.href); $('#share').textContent = '¡Enlace copiado!'; } } catch {}
 });
 
 /* --- Música de fondo --- */
